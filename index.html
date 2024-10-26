@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My Art Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
+        }
+        .gallery-item {
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: white;
+            padding: 10px;
+        }
+        .gallery-item img,
+        .gallery-item video {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2.5em;
+            color: #333;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            .gallery-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>My Art Gallery</h1>
+    <div class="gallery-container" id="gallery"></div>
+
+    <script>
+        // Function to dynamically load artworks from the 'arts' folder
+        const artFolder = './arts/';
+        const gallery = document.getElementById('gallery');
+
+        const artFiles = [
+            'ins2.jpg',
+            'ins1.jpg',
+            '1.jpg',
+            'Screenshot 2024-10-26 at 19.02.19.png',
+            '1.png',
+            '2.png',
+            '3.png',
+            '4.png',
+            'CardBack.png',
+            'D10.png',
+            'DebrecenFireworkFestival.png',
+            'sorak.mp4',
+            'ec.jpeg',
+            'ec2.jpeg',
+            'final.jpg',
+            'HK.png',
+            'IconNEW.png',
+            'janedoe.png',
+            'laptop.png',
+            'LLaptop.png',
+            'pref.jpg',
+            'SA.png',
+            'screen1.jpg',
+            'screen2.jpg',
+            'Screenshot 2024-10-20 at 15.45.17.png',
+            'Screenshot 2024-10-26 at 19.01.33.png'
+        ];
+
+        artFiles.forEach(file => {
+            const fileExtension = file.split('.').pop().toLowerCase();
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('gallery-item');
+
+            if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
+                const imgElement = document.createElement('img');
+                imgElement.src = artFolder + file;
+                imgElement.alt = 'Artwork';
+                itemDiv.appendChild(imgElement);
+            } else if (['mp4', 'webm'].includes(fileExtension)) {
+                const videoElement = document.createElement('video');
+                videoElement.src = artFolder + file;
+                videoElement.controls = true;
+                itemDiv.appendChild(videoElement);
+            }
+
+            gallery.appendChild(itemDiv);
+        });
+    </script>
+</body>
+</html>
